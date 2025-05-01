@@ -1,0 +1,103 @@
+/* === SHARED BASE STYLES === */
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500&display=swap');
+
+:root {
+    --primary-color: #00ff00;
+    --wireframe-color: #00ff00;
+    --background-color: #000;
+    --sidebar-width: 200px;
+    --main-padding: 20px;
+    --transition-speed: 0.4s;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+body {
+    font-family: 'Source Code Pro', monospace;
+    background-color: var(--background-color);
+    color: var(--wireframe-color);
+}
+
+/* Themes */
+.light-theme {
+    --background-color: #f0f0f0;
+    --wireframe-color: #333;
+}
+
+.dark-theme {
+    --background-color: #000;
+    --wireframe-color: #00ff00;
+}
+
+/* === SHARED LAYOUT === */
+
+.wf-dashboard {
+    display: flex;
+    height: 100vh;
+}
+
+.wf-sidebar {
+    width: var(--sidebar-width);
+    background-color: #111;
+    padding: var(--main-padding);
+    border-right: 2px solid var(--wireframe-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.wf-sidebar__title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.wf-sidebar__nav .wf-sidebar__link,
+.wf-sidebar__nav a {
+    display: block;
+    padding: 10px 0;
+    text-decoration: none;
+    color: var(--wireframe-color);
+    border-bottom: 2px solid var(--wireframe-color);
+    cursor: pointer;
+}
+
+.wf-sidebar__footer {
+    margin-top: auto;
+    font-size: 0.8rem;
+}
+
+.wf-main {
+    flex: 1;
+    overflow-y: auto;
+    padding: var(--main-padding, 20px);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.wf-main__input {
+    padding: 10px;
+    background-color: #222;
+    color: var(--wireframe-color);
+    border: 2px solid var(--wireframe-color);
+    border-radius: 5px;
+    font-family: 'Source Code Pro', monospace;
+    width: 100%;
+}
+
+.wf-user-info {
+    width: var(--sidebar-width);
+    background-color: #111;
+    padding: var(--main-padding);
+    border-left: 2px solid var(--wireframe-color);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}

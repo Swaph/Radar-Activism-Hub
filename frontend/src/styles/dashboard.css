@@ -1,0 +1,254 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@300;400;500&display=swap');
+
+:root {
+    --primary-color: #00ff00;
+    --wireframe-color: #00ff00;
+    --background-color: #000;
+    --sidebar-width: 200px;
+    --main-padding: 20px;
+    --transition-speed: 0.4s;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+body {
+    font-family: 'Source Code Pro', monospace;
+    background-color: var(--background-color);
+    color: var(--wireframe-color);
+    /*overflow: hidden;*/
+}
+
+/* Light Theme */
+.light-theme {
+    --background-color: #f0f0f0;
+    --wireframe-color: #333;
+}
+
+.dark-theme {
+    --background-color: #000;
+    --wireframe-color: #00ff00;
+}
+
+.wf-dashboard {
+    display: flex;
+    height: 100vh;
+}
+
+.wf-sidebar {
+    width: var(--sidebar-width);
+    background-color: #111;
+    padding: var(--main-padding);
+    border-right: 2px solid var(--wireframe-color);
+}
+
+.wf-sidebar__title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.wf-sidebar__nav .wf-sidebar__link {
+    display: block;
+    padding: 10px 0;
+    text-decoration: none;
+    color: var(--wireframe-color);
+    border-bottom: 2px solid var(--wireframe-color);
+    cursor: pointer;
+}
+
+.wf-main {
+    flex: 1;
+    padding: var(--main-padding);
+    text-align: center;
+}
+
+
+.wf-main__select {
+    background-color: black;
+    color: #00ff00;
+    border: 2px solid #00ff00;
+    padding: 10px;
+    border-radius: 5px;
+    font-family: "Courier New", monospace;
+    font-size: 1rem;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 100%;
+    box-shadow: 0 0 5px #00ff00;
+}
+
+.wf-main__select:focus {
+    outline: none;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+
+.wf-btn {
+    padding: 10px 20px;
+    border: 2px solid var(--wireframe-color);
+    background-color: #222;
+    color: var(--wireframe-color);
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color var(--transition-speed), color var(--transition-speed);
+}
+
+.wf-btn--primary { background-color: #00ff00; color: #000; }
+.wf-btn--secondary { background-color: #00cc00; color: #000; }
+.wf-btn--tertiary { background-color: #009900; color: #000; }
+
+.wf-btn:hover { opacity: 0.8; }
+
+.wf-user-info {
+    width: var(--sidebar-width);
+    background-color: #111;
+    padding: var(--main-padding);
+    border-left: 2px solid var(--wireframe-color);
+}
+
+/* Theme Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 28px;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+  }
+
+  input:checked + .slider {
+    background-color: black;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(22px);
+  }
+
+  /* Rounded slider */
+  .slider.round {
+    border-radius: 34px;
+  }
+
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
+
+.wf-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 2px solid #00ff00;
+    border-radius: 10px;
+    background-color: #000;
+    color: #00ff00;
+}
+
+
+.wf-heading {
+    font-size: 1.8rem;
+    text-shadow: 0 0 8px #00ff00;
+    margin-bottom: 20px;
+}
+
+.wf-section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 2px solid #00ff00;
+    border-radius: 10px;
+    background-color: #111;
+}
+
+.wf-label {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 6px;
+    display: block;
+}
+
+.wf-note {
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-bottom: 10px;
+    color: #00ff00;
+}
+
+.wf-footer-note {
+    margin-top: 40px;
+    font-size: 0.75rem;
+    font-style: italic;
+    text-align: center;
+    color: #00ff00;
+}
+
+
+
+/* You already have button styles */
+.wf-btn {
+    padding: 10px 20px;
+    border: 2px solid #00ff00;
+    background-color: transparent;
+    color: #00ff00;
+    border-radius: 5px;
+    font-family: "Courier New", monospace;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.wf-btn:hover {
+    background-color: #00ff00;
+    color: black;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+.wf-btn--primary {
+    background-color: #00ff00;
+    color: black;
+    font-weight: bold;
+}
+
+.wf-btn--secondary {
+    background-color: #111;
+    color: #00ff00;
+}
+
+.wf-btn--tertiary {
+    background-color: red;
+    color: white;
+    border-color: red;
+}
+
+.wf-btn--tertiary:hover {
+    background-color: darkred;
+}

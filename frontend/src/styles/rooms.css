@@ -1,0 +1,306 @@
+
+/* Base Reset */
+body {
+  font-family: "Courier New", monospace;
+  background-color: black;
+  color: #00ff00;
+  margin: 0;
+  padding: 0;
+}
+
+.wf-dashboard {
+  display: flex;
+  height: 100vh;
+}
+
+/* Left + Right Sidebar */
+.wf-sidebar,
+.wf-user-info {
+  width: 250px;
+  background-color: #111;
+  padding: 20px;
+  border-right: 2px solid #00ff00;
+  font-family: "Courier New", monospace;
+}
+
+/* Sidebar Navigation */
+.wf-sidebar__title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #00ff00;
+}
+.wf-sidebar__nav a {
+  display: block;
+  padding: 10px;
+  border-bottom: 1px solid #00ff00;
+  color: #00ff00;
+  text-decoration: none;
+}
+.wf-sidebar__nav a:hover {
+  background-color: #222;
+}
+
+/* Main Panel */
+.wf-main {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Chatbox Area */
+.wf-chatbox {
+  border: 2px solid #00ff00;
+  height: 300px;
+  margin-top: 10px;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #000;
+}
+
+/* Message Bubbles */
+.message-bubble {
+  padding: 8px 12px;
+  margin: 6px 0;
+  border-radius: 8px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.message-left {
+  background-color: #003300;
+  text-align: left;
+  margin-right: auto;
+}
+
+.message-right {
+  background-color: #004400;
+  text-align: right;
+  margin-left: auto;
+}
+
+/* Action Buttons */
+.wf-main__buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+.wf-main__buttons button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background-color: #00cc44;
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  border-radius: 5px;
+}
+.wf-main__buttons button:hover {
+  background-color: #00ff00;
+  transform: scale(1.05);
+}
+.dark-theme .wf-main__buttons button {
+  color: white;
+}
+
+/* Chat Input Row */
+.wf-message-input {
+  display: flex;
+  border-top: 2px solid #00ff00;
+  padding: 10px;
+  background-color: black;
+}
+.wf-message-input input,
+.wf-message-input .MuiInputBase-root {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #00ff00;
+  background-color: black;
+  color: #00ff00;
+}
+.wf-message-input button {
+  background-color: #00ff00;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+.wf-message-input button:hover {
+  background-color: #00cc00;
+}
+
+/* Peers Sidebar */
+.wf-chat-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+.wf-peer-name {
+  font-size: 0.95rem;
+  font-family: "Courier New", monospace;
+  color: #00ff00;
+}
+.wf-label {
+  font-weight: bold;
+  font-size: 0.95rem;
+  color: #00ff00;
+  margin-bottom: 6px;
+}
+.wf-input.wf-input--boxed {
+  background-color: black;
+  border: 2px solid #00ff00;
+  color: #00ff00;
+  padding: 10px;
+  width: 100%;
+}
+
+/* Connection Status Indicator */
+.wf-status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: gray;
+  animation: pulse 1.5s infinite;
+}
+
+.wf-status-indicator.online {
+  background-color: limegreen;
+}
+
+.wf-status-indicator.searching {
+  background-color: orange;
+}
+
+.wf-status-indicator.disconnected {
+  background-color: red;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.7; }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.7; }
+  50% { transform: scale(1.3); opacity: 1; }
+}
+@keyframes spin {
+  0% { transform: rotate(0); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.spin {
+  animation: spin 2s linear infinite;
+}
+
+.pulse {
+  animation: pulse 1.5s infinite;
+}
+
+/* Overlay backdrop */
+.wf-password-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* Card container */
+.wf-password-card {
+  background-color: #000;
+  border: 2px solid limegreen;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  color: limegreen;
+  box-shadow: 0 0 25px limegreen;
+  text-align: center;
+}
+
+/* Title */
+.wf-password-title {
+  font-size: 1.8rem;
+  font-family: 'Courier New', Courier, monospace;
+  margin: 0.5rem 0;
+  color: limegreen;
+}
+
+/* Subtitle/description */
+.wf-password-subtext {
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Courier New', Courier, monospace;
+  color: limegreen;
+}
+
+/* Lock icon style */
+.icon-lock {
+  font-size: 2rem;
+  margin-right: 0.5rem;
+  color: limegreen;
+}
+
+/* Header flex wrapper */
+.wf-password-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Input field customization */
+.wf-password-input .MuiOutlinedInput-root {
+  color: limegreen;
+  border-radius: 10px;
+  border: 1px solid limegreen;
+  background-color: black;
+}
+
+.wf-password-input .MuiOutlinedInput-notchedOutline {
+  border-color: limegreen;
+}
+
+.wf-password-input input {
+  color: limegreen;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+/* Button container */
+.wf-overlay__buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1.5rem;
+}
+
+/* Buttons */
+.wf-overlay__buttons button {
+  color: limegreen;
+  border-color: limegreen;
+  font-family: 'Courier New', Courier, monospace;
+  transition: all 0.3s ease;
+}
+
+.wf-overlay__buttons button:hover {
+  background-color: limegreen;
+  color: black;
+}

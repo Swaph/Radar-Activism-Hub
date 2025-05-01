@@ -1,0 +1,240 @@
+/* ✅ Container for community forum */
+.wf-community-container {
+    padding: 40px;
+    color: #00ff00;
+    font-family: "Courier New", monospace;
+    max-width: 900px;
+    margin: auto;
+}
+
+/* ✅ Header styling */
+.wf-community-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.wf-community-title {
+    font-size: 2.5rem;
+    text-shadow: 0 0 8px #00ff00;
+    margin-bottom: 10px;
+    color: #00ff00;
+}
+
+.wf-community-description {
+    font-size: 1rem;
+    font-style: italic;
+    color: #88ff88;
+    margin-bottom: 20px;
+}
+
+/* Descriptions for each room */
+.wf-community-info-box {
+    background-color: #111;
+    border: 2px solid #00ff00;
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #bbffbb;
+}
+
+.wf-community-info-box strong {
+    display: block;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    color: #00ff00;
+}
+
+/* Section block styles */
+.wf-community-section {
+    border: 2px solid #00ff00;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #111;
+    margin-bottom: 30px;
+}
+
+/* Rules list */
+.wf-community-rules {
+    padding-left: 20px;
+}
+
+.wf-community-rules li {
+    margin: 10px 0;
+    font-size: 1rem;
+}
+
+/* Placeholder box */
+.wf-community-chat-placeholder {
+    text-align: center;
+    padding: 30px;
+    border: 1px dashed #00ff00;
+    border-radius: 10px;
+    background-color: #111;
+    color: #00ff00;
+    font-style: italic;
+}
+
+/* Post box */
+.wf-post-box {
+    background: #111;
+    border: 2px solid #00ff00;
+    padding: 25px;
+    margin: 30px auto;
+    border-radius: 12px;
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: stretch;
+}
+
+.wf-post-input {
+    width: 100%;
+    padding: 15px;
+    font-size: 1rem;
+    background: black;
+    color: #00ff00;
+    border: 2px solid #00ff00;
+    font-family: "Courier New", monospace;
+    border-radius: 8px;
+    resize: vertical;
+}
+
+.wf-btn--primary {
+    align-self: flex-end;
+    padding: 10px 20px;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #00ff00;
+    color: black;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 10px #00ff00;
+    transition: 0.3s ease-in-out;
+}
+
+.wf-btn--primary:hover {
+    background-color: limegreen;
+    box-shadow: 0 0 15px #00ff00;
+}
+
+.wf-post-feed {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    max-width: 800px;
+    margin: 30px auto;
+}
+
+.wf-post-card {
+    background: #111;
+    border: 2px solid #00ff00;
+    padding: 20px;
+    border-radius: 10px;
+    transition: 0.3s ease;
+}
+
+.wf-post-card.pinned {
+    border-color: gold;
+    box-shadow: 0 0 12px gold;
+}
+
+.wf-post-meta {
+    font-size: 0.85rem;
+    color: lime;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+
+.edited-label {
+    color: #88ff88;
+    font-style: italic;
+    font-size: 0.8rem;
+    margin-left: 6px;
+}
+
+.pinned-label {
+    color: gold;
+    font-size: 0.85rem;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.wf-post-content {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    color: #00ff00;
+}
+
+.wf-post-reactions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.wf-emoji-btn {
+    background: transparent;
+    border: 1px solid #00ff00;
+    border-radius: 20px;
+    color: #00ff00;
+    cursor: pointer;
+    padding: 6px 12px;
+    font-size: 1.1rem;
+    font-family: "Courier New", monospace;
+    transition: 0.2s ease;
+}
+
+.wf-emoji-btn:hover {
+    background-color: #00ff00;
+    color: black;
+    box-shadow: 0 0 6px #00ff00;
+}
+
+.wf-post-controls {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.wf-post-controls button {
+    padding: 6px 14px;
+    font-size: 0.85rem;
+    font-family: "Courier New", monospace;
+    background-color: #111;
+    border: 2px solid #00ff00;
+    color: #00ff00;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wf-post-controls button:hover {
+    background-color: #00ff00;
+    color: #000;
+    box-shadow: 0 0 10px #00ff00;
+}
+
+.wf-media-preview {
+    display: block;
+    max-width: 100%;
+    max-height: 300px;
+    width: auto;
+    height: auto;
+    margin-top: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px #00ff00;
+    background-color: #000;
+}
+
+.wf-media-preview iframe {
+    width: 100%;
+    height: 300px;
+    border: none;
+}
