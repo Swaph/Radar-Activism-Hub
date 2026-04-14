@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ShellProvider } from "./contexts/ShellContext";
 import { ChatProvider } from "./contexts/ChatContext";
 import Layout from "./components/Layout";
+import RequireAuth from "./components/RequireAuth";
 import LandingPage from "./pages/LandingPage";
 import Dashboard from "./pages/Dashboard";
 import PrivateRoom from "./pages/PrivateRoom";
@@ -20,13 +21,13 @@ const App = () => {
                     <Routes>
                         <Route path="/" element={<LandingPage />} />
                         <Route element={<Layout />}>
-                            <Route path="/dashboard" element={<Dashboard />} />
-                            <Route path="/settings" element={<Settings />} />
-                            <Route path="/about" element={<About />} />
-                            <Route path="/disclaimer" element={<Disclaimer />} />
-                            <Route path="/public/:roomId" element={<PublicRoom />} />
-                            <Route path="/private/:roomId" element={<PrivateRoom />} />
-                            <Route path="/community/:roomName" element={<CommunityForum />} />
+                            <Route path="/dashboard" element={<RequireAuth><Dashboard /></RequireAuth>} />
+                            <Route path="/settings" element={<RequireAuth><Settings /></RequireAuth>} />
+                            <Route path="/about" element={<RequireAuth><About /></RequireAuth>} />
+                            <Route path="/disclaimer" element={<RequireAuth><Disclaimer /></RequireAuth>} />
+                            <Route path="/public/:roomId" element={<RequireAuth><PublicRoom /></RequireAuth>} />
+                            <Route path="/private/:roomId" element={<RequireAuth><PrivateRoom /></RequireAuth>} />
+                            <Route path="/community/:roomName" element={<RequireAuth><CommunityForum /></RequireAuth>} />
                         </Route>
                         <Route path="*" element={<h1>404 - Page Not Found</h1>} />
                     </Routes>

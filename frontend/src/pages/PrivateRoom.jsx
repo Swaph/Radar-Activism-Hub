@@ -6,14 +6,13 @@ import {
 import {
   Mic, Videocam, ScreenShare, AttachFile, Send, Delete, Edit, Cancel, Save
 } from "@mui/icons-material";
-import { io } from "socket.io-client";
 import { v4 as uuidv4 } from "uuid";
 import { ChatContext } from "../contexts/ChatContext";
 import { moderatorUsernames } from "../constants/moderators"; // REVERTED HERE
+import { createAuthedSocket } from "../utils/socket";
 import "../styles/rooms.css";
 import "../styles/shared.css";
 
-const socket = io("http://localhost:5000");
 const REACTION_EMOJIS = ["🇰🇪", "✊", "👍", "👎"];
 
 export default function PrivateRoom() {
@@ -35,6 +34,7 @@ export default function PrivateRoom() {
   const [micEnabled, setMicEnabled] = useState(true);
   const [cameraEnabled, setCameraEnabled] = useState(true);
   const [screenSharing, setScreenSharing] = useState(false);
+  const socketRef = useRef(null);
 
   const isMod = moderatorUsernames.includes(username); // REVERTED HERE
 
@@ -44,7 +44,10 @@ export default function PrivateRoom() {
 
   useEffect(() => {
     if (isMod || !showPasswordOverlay) {
-      socket.emit("joinRoom", { roomId, username, password });
+      const socket = createAuthedSocket();
+      socketRef.current = socket;
+
+      socket.emit("joinRoom", { roomId, password });
 
       socket.on("message", (payload) => {
         const msg = payload.message || payload;
@@ -95,13 +98,14 @@ export default function PrivateRoom() {
       });
 
       return () => {
-        socket.emit("leaveRoom", username);
+        socket.emit("leaveRoom", roomId);
         socket.off("message");
         socket.off("updatePeers");
         socket.off("deleteMessage");
         socket.off("editMessage");
         socket.off("updateReactions");
         socket.off("wrongPassword");
+        socket.disconnect();
       };
     }
   }, [roomId, username, password, showPasswordOverlay, setPeers, setConnectionStatus, isMod]);
@@ -131,14 +135,14 @@ export default function PrivateRoom() {
       } : null
     };
 
-    socket.emit("sendMessage", { roomId, message: newMessage });
+    socketRef.current?.emit("sendMessage", { roomId, message: newMessage });
     setMessages(prev => [...prev, newMessage]);
     setMessage("");
     setFile(null);
   };
 
   const deleteMessage = (msgId, asMod = false) => {
-    socket.emit("deleteMessage", { roomId, id: msgId, deletedBy: asMod ? "mod" : "user" });
+    socketRef.current?.emit("deleteMessage", { roomId, id: msgId, deletedBy: asMod ? "mod" : "user" });
   };
 
   const startEdit = (msg) => {
@@ -152,7 +156,7 @@ export default function PrivateRoom() {
   };
 
   const saveEdit = () => {
-    socket.emit("editMessage", { roomId, id: editingId, newText: editText });
+    socketRef.current?.emit("editMessage", { roomId, id: editingId, newText: editText });
     cancelEdit();
   };
 
@@ -269,7 +273,7 @@ export default function PrivateRoom() {
                 const alreadyReactedToThis = msg.reactions?.[emoji]?.includes(username);
                 if (userHasReactedToAny && !alreadyReactedToThis) return;
 
-                socket.emit("reactToMessage", {
+                socketRef.current?.emit("reactToMessage", {
                   roomId,
                   messageId: msg.id,
                   emoji,

@@ -1,9 +1,10 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
-const crypto = require("crypto");
 require("dotenv").config();
 
 const router = express.Router();
+
+const USERNAME_PATTERN = /^[A-Za-z0-9_-]{3,24}$/;
 
 const generateUsername = () => {
   const adjectives = ["Rebel", "Shadow", "Cipher", "Ghost"];
@@ -15,28 +16,21 @@ const generateUsername = () => {
   );
 };
 
-const generateKeyPair = () => {
-  return crypto.generateKeyPairSync("rsa", {
-    modulusLength: 2048,
-    publicKeyEncoding: { type: "spki", format: "pem" },
-    privateKeyEncoding: { type: "pkcs8", format: "pem" },
-  });
-};
-
-
 router.post("/guest", (req, res) => {
-  const username = generateUsername();
-  const { publicKey, privateKey } = generateKeyPair();
+  const requestedUsername = typeof req.body?.username === "string" ? req.body.username.trim() : "";
+  const username = USERNAME_PATTERN.test(requestedUsername) ? requestedUsername : generateUsername();
 
   if (!process.env.JWT_SECRET) {
     return res.status(500).json({ error: "Missing JWT_SECRET in .env" });
   }
 
-  const token = jwt.sign({ username, publicKey }, process.env.JWT_SECRET, {
-    expiresIn: "24h",
+  const token = jwt.sign({ username }, process.env.JWT_SECRET, {
+    expiresIn: "2h",
+    issuer: "radar-backend",
+    audience: "radar-clients"
   });
 
-  res.json({ token, username, publicKey, privateKey });
+  res.json({ token, username });
 });
 
 module.exports = router;

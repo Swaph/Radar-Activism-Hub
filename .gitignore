@@ -1,4 +1,17 @@
 # dependencies
 /node_modules
+/backend/node_modules
+/frontend/node_modules
 /.pnp
 .pnp.js
+
+# environment secrets
+.env
+.env.*
+backend/.env
+frontend/.env
+
+# build and reports
+coverage/
+frontend/build/
+backend/coverage/

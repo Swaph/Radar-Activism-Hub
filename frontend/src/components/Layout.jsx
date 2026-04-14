@@ -9,10 +9,11 @@ import WifiTetheringIcon from "@mui/icons-material/WifiTethering";
 import LockIcon from "@mui/icons-material/Lock";
 import LoopIcon from "@mui/icons-material/Loop";
 import Tooltip from "@mui/material/Tooltip";
+import { getTokenUsername } from "../utils/auth";
 
 export default function StickyShellLayout() {
     const [username, setUsername] = useState(() => {
-        return localStorage.getItem("username") || `Cyber${Math.floor(Math.random() * 1000)}`;
+        return getTokenUsername() || localStorage.getItem("username") || `Cyber${Math.floor(Math.random() * 1000)}`;
     });
 
     const [isDarkTheme, setIsDarkTheme] = useState(() => {
@@ -34,6 +35,13 @@ export default function StickyShellLayout() {
     }, [isDarkTheme]);
 
     useEffect(() => {
+        const tokenUsername = getTokenUsername();
+        if (tokenUsername && tokenUsername !== username) {
+            setUsername(tokenUsername);
+            localStorage.setItem("username", tokenUsername);
+            return;
+        }
+
         localStorage.setItem("username", username);
     }, [username]);
 
@@ -117,7 +125,7 @@ export default function StickyShellLayout() {
                                 type="text"
                                 className="wf-input wf-input--boxed"
                                 value={username}
-                                onChange={(e) => setUsername(e.target.value)}
+                                readOnly
                             />
                         </div>
 
@@ -153,7 +161,7 @@ export default function StickyShellLayout() {
                             type="text"
                             className="wf-main__input"
                             value={username}
-                            onChange={(e) => setUsername(e.target.value)}
+                            readOnly
                             placeholder="Your username"
                         />
                     </div>

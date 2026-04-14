@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technical Dossier | Radar Resilient Information Hub</title>
+  <style>
+    :root {
+      --ink: #15263e;
+      --muted: #4a5d78;
+      --line: #d5dfec;
+      --paper: #ffffff;
+      --bg: #f4f8fe;
+      --primary: #008cff;
+      --primary-2: #0b4e87;
+      --ok: #13745a;
+      --warning-bg: #fffcf0;
+      --warning-text: #78350f;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+    }
+
+    .page {
+      position: relative;
+      width: min(980px, 92vw);
+      margin: 30px auto;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      box-shadow: 0 4px 12px rgba(21, 38, 62, 0.05);
+      padding: 40px;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: 1.8rem;
+      line-height: 1.1;
+      font-family: "IBM Plex Mono", monospace;
+      text-transform: uppercase;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      margin: 28px 0 12px;
+      font-size: 1.3rem;
+      line-height: 1.2;
+      font-family: "IBM Plex Mono", monospace;
+      color: var(--primary);
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 8px;
+    }
+
+    h3 {
+      margin: 16px 0 8px;
+      font-size: 1.05rem;
+      font-family: Georgia, "Times New Roman", serif;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .sub {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 1rem;
+      font-style: italic;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      padding-bottom: 15px;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: var(--ok);
+      color: white;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.75rem;
+      font-weight: bold;
+    }
+
+    .technical-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 20px 0;
+    }
+
+    .tag {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.7rem;
+      padding: 2px 8px;
+      border: 1px solid var(--line);
+      background: var(--bg);
+      color: var(--muted);
+    }
+
+    .dev-note {
+      margin: 20px 0;
+      padding: 15px;
+      background: var(--warning-bg);
+      color: var(--warning-text);
+      border-left: 4px solid #f59e0b;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.85rem;
+      line-height: 1.6;
+    }
+
+    .impact-box {
+      border: 1px solid var(--line);
+      padding: 20px;
+      background: #fafafa;
+      line-height: 1.7;
+    }
+
+    .section-title {
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.9rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: block;
+      color: var(--primary);
+    }
+
+    .roi-section {
+      margin-top: 20px;
+      padding-top: 15px;
+      border-top: 1px dashed var(--line);
+    }
+
+    .btn-group {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+      gap: 10px;
+      margin: 20px 0;
+    }
+
+    a.btn {
+      display: block;
+      text-align: center;
+      padding: 10px;
+      text-decoration: none;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.75rem;
+      font-weight: bold;
+      border: 1px solid var(--line);
+      transition: all 0.2s;
+    }
+
+    a.btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 2px 6px rgba(21, 38, 62, 0.15);
+    }
+
+    .btn-view { background: var(--ink); color: white; }
+    .btn-view:hover { background: var(--primary); }
+    .btn-drive { background: #eef5fd; color: var(--primary); }
+    .btn-drive:hover { background: #dde8f7; }
+
+    .artifacts-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 0.95rem;
+      line-height: 1.8;
+    }
+
+    .artifacts-list li {
+      margin-bottom: 10px;
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    .artifacts-list a { color: var(--primary); text-decoration: none; font-weight: 600; }
+    .artifacts-list a:hover { text-decoration: underline; }
+
+    .toc {
+      background: #f0f4f9;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 16px;
+      margin: 20px 0;
+    }
+
+    .toc h3 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+    }
+
+    .toc ul {
+      margin: 0;
+      padding-left: 20px;
+      list-style: none;
+    }
+
+    .toc li {
+      margin: 4px 0;
+    }
+
+    .toc a {
+      color: var(--primary);
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    p {
+      line-height: 1.7;
+      margin: 12px 0;
+    }
+
+    ul {
+      margin: 12px 0;
+      padding-left: 24px;
+      line-height: 1.7;
+    }
+
+    ul li {
+      margin-bottom: 6px;
+    }
+
+    .methodology-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    .method-box {
+      border: 1px solid var(--line);
+      padding: 14px;
+      background: #fbfdff;
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+
+    .method-box h4 {
+      margin: 0 0 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .method-box p {
+      margin: 0;
+      font-size: 0.9rem;
+    }
+
+    small {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    code {
+      background: #f5f7fa;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: "IBM Plex Mono", monospace;
+      font-size: 0.9rem;
+      color: var(--ink);
+    }
+
+    @media print {
+      .page { box-shadow: none; border: none; width: 100%; margin: 0; }
+      .btn-group { display: none; }
+      .toc { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="status-row">
+      <h1>Radar Resilient Information Hub</h1>
+      <div class="badge">CASE STUDY / ACTIVE</div>
+    </div>
+
+    <p class="sub">
+      A cybersecurity and digital public infrastructure study on maintaining information integrity and accessibility during network volatility, with emphasis on data sovereignty and resilient communication in African communities.
+    </p>
+
+    <div class="technical-tags">
+      <span>STACK: React 19 | Node.js Express | Socket.IO</span>
+      <span>ARCHITECTURE: Resilience-first | Real-time messaging | Audit-aware</span>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc">
+      <h3>Table of Contents</h3>
+      <ul>
+        <li><a href="#executive">Executive Summary</a></li>
+        <li><a href="#problem">Problem Statement</a></li>
+        <li><a href="#system">System Architecture</a></li>
+        <li><a href="#features">Core Features</a></li>
+        <li><a href="#methodology">Implementation Methodology</a></li>
+        <li><a href="#evaluation">Evaluation & Benchmarks</a></li>
+        <li><a href="#context">Research Framing</a></li>
+        <li><a href="#evidence">Evidence & Resources</a></li>
+      </ul>
+    </div>
+
+    <!-- Executive Summary -->
+    <section id="executive">
+      <h2>Abstract</h2>
+      <p>
+        Radar Resilient Information Hub is a cybersecurity and digital public infrastructure case study addressing information failure during network instability. The system is designed as a high-availability communication node with emphasis on data integrity, moderator accountability, and resilient African cyberspace outcomes.
+      </p>
+      <p>
+        In high-risk and low-stability environments, communities need systems that remain available under unstable network conditions, preserve integrity of shared information, provide accountable moderation, and reduce dependence on centralized trust bottlenecks. Radar operationalizes this through real-time room-based messaging, hash-chained audit logging, moderator-aware permission models, and passive persistence enabling recovery across network disruptions.
+      </p>
+      <p>
+        The platform integrates three measurable goals: <strong>Availability</strong> (maintain functional communication during network churn and packet degradation), <strong>Integrity</strong> (prevent or detect unauthorized modification of moderation actions), and <strong>Accountability</strong> (produce transparent, reviewable governance trails). The implementation emphasizes engineering rigor through formal threat modeling, structured test matrices, and reproducible resilience benchmarks.
+      </p>
+      <p>
+        This work combines systems engineering with applied research relevant to secure systems, trustworthy computing, and data sovereignty in African contexts, demonstrating practical approaches to digital public infrastructure that prioritize community agency and local control.
+      </p>
+    </section>
+
+    <!-- Problem Statement -->
+    <section id="problem">
+      <h2>Problem Statement & Motivation</h2>
+      <p>
+        In high-risk and low-stability environments—characterized by connectivity disruptions, censorship pressure, rapid misinformation events, and infrastructure volatility—communities lose access to communication systems exactly when trusted information coordination matters most. Traditional centralized platforms offer neither resilience during instability nor user agency over moderation governance.
+      </p>
+      <p>
+        The technical challenge spans three dimensions:
+      </p>
+      <ul>
+        <li><strong>Availability:</strong> Communication systems fail during network churn, packet degradation, and geopolitical connectivity disruptions; recovery is manual and slow</li>
+        <li><strong>Integrity:</strong> Absence of immutable records enables unauthorized modification of content or moderation actions; communities cannot verify governance decisions</li>
+        <li><strong>Accountability:</strong> No systematic audit trail of moderation behavior; governance decisions remain opaque; communities lack recourse for policy disputes</li>
+      </ul>
+      <p>
+        These failures compound in African contexts where digital public infrastructure often exhibits characteristics of both technical fragility (limited redundancy, variable network quality) and governance opacity (centralized platform providers operating outside local jurisdictions). Addressing this problem requires systems that prioritize local control, transparency in governance, and explicit design for operation under realistic constraint conditions.
+      </p>
+    </section>
+
+    <!-- System Architecture -->
+    <section id="system">
+      <h2>System Architecture & Design Rationale</h2>
+      <p>
+        Radar employs a resilience-first architecture emphasizing passive persistence, distributed coordination, and accountability through immutable audit trails. The design supports real-time communication over transient networks while preserving governance transparency.
+      </p>
+      <div class="methodology-grid">
+        <div class="method-box">
+          <h4>Frontend Layer</h4>
+          <p><strong>React 19 + Vite:</strong> Real-time UI synchronized with server state via Socket.IO. Responsive component design optimized for network latency variation and browser-based media controls (mic/camera/screen share). Message and reaction flows with optimistic UI updates.</p>
+        </div>
+        <div class="method-box">
+          <h4>Real-Time Transport</h4>
+          <p><strong>Socket.IO over WebSocket:</strong> Event-driven bidirectional communication with automatic fallback and reconnection handling. Room-based message broadcasting with explicit moderator permission enforcement at each emission point.</p>
+        </div>
+        <div class="method-box">
+          <h4>Data Layer & Persistence</h4>
+          <p><strong>In-memory state + file-based recovery:</strong> Message and room state persisted to disk on each modification; restart triggers state rebuild from append-only logs, enabling recovery without external database dependency during deployments.</p>
+        </div>
+        <div class="method-box">
+          <h4>Audit & Governance</h4>
+          <p><strong>Hash-chained audit logging:</strong> Append-only event log with SHA-256 chain linking; each moderation action, permission check, and policy event recorded immutably. Audit integrity health endpoint enables verification of log consistency.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Key Features -->
+    <section id="features">
+      <h2>Core Features & Operational Workflows</h2>
+      <p><strong>Guest Onboarding:</strong> Zero-friction entry point. New participants onboard as guests and receive time-limited JWT identities without pre-registration, enabling rapid community organization while maintaining modest authentication boundaries.</p>
+      <p><strong>Real-Time Room Messaging:</strong> Participants join named rooms (public or private) and exchange messages in real time. Message delivery guaranteed through Socket.IO reliability layer; optimistic UI updates provide immediate feedback despite network latency.</p>
+      <p><strong>Private Room Access Control:</strong> Room operators set optional password gating. Access rules enforced at both connection and message emission points; unauthorized access attempts logged to audit trail with attacker identity context.</p>
+      <p><strong>Moderator-Aware Permissions:</strong> Room moderators possess explicit delete permissions over messages and ability to modify room properties. Moderation decisions (deletion, room configuration changes) logged immutably to audit trail with moderator identity and timestamp. Non-moderators cannot perform these actions; attempts are rejected server-side with audit recording.</p>
+      <p><strong>Message Edit & Reaction Flows:</strong> Participants edit their own sent messages (edit history not currently exposed but logged). All participants can add emoji reactions to messages; reactions propagate in real time with optimistic updates.</p>
+      <p><strong>Media Controls:</strong> Browser-side media capture (microphone, camera, screen share); signaling layer enables peer-to-peer media coordination. Media state tracked per-participant and broadcast to room members.</p>
+      <p><strong>Persistent State Recovery:</strong> Server maintains append-only JSON logs of all room and message state changes. On restart, server replays log to rebuild in-memory state. Network disruptions or server restarts do not result in message loss or state corruption.</p>
+      <p><strong>Immutable Audit Logging:</strong> All moderation actions, permission checks, and policy events written to hash-chained append-only log. Audit log integrity verified through endpoint <code>/api/system/audit-health</code> which reports hash chain consistency and reports any invalid entries.</p>
+    </section>
+
+    <!-- Methodology & Implementation -->
+    <section id="methodology">
+      <h2>Implementation Methodology</h2>
+      <p>
+        Radar was developed following an iterative, evidence-centric approach prioritizing verifiability of security and resilience claims over feature maximization. Development phases emphasized threat modeling, formal test matrix definition, and reproducible benchmarking before feature implementation.
+      </p>
+      <ul>
+        <li><strong>Phase 1 (Threat Modeling & Requirements):</strong> Formal adversary profiles, trust boundary definition, risk enumeration, and mitigation roadmap. Threat model published in <code>docs/THREAT_MODEL.md</code></li>
+        <li><strong>Phase 2 (Test Matrix & Success Criteria):</strong> Structured definition of functional, abuse, and resilience test scenarios with pass/fail criteria. Published in <code>docs/TEST_MATRIX.md</code></li>
+        <li><strong>Phase 3 (Core Architecture & Auth):</strong> Socket.IO real-time layer, JWT guest onboarding, moderator permission model, initial message and room state management</li>
+        <li><strong>Phase 4 (Persistence & Audit):</strong> Append-only JSON logging, file-based state recovery, hash-chained audit trail, integrity health endpoint</li>
+        <li><strong>Phase 5 (Testing & Benchmarking):</strong> Unit/integration test suites, abuse-resilience fuzzing, network fault injection, reproducible resilience benchmark script</li>
+      </ul>
+      <h3>Technology Stack Rationale</h3>
+      <p>
+        Stack choices prioritized simplicity, auditability, and offline-as-a-primary-design-target. <strong>React 19</strong> enables responsive multi-room UI with real-time updates. <strong>Node.js Express</strong> provides lightweight event-driven server suitable for modest hardware. <strong>Socket.IO</strong> offers robust WebSocket abstraction with built-in reconnection and fallback. <strong>In-memory state + append-only file logging</strong> avoids external database dependency while guaranteeing data durability and recovery capability without external infrastructure. <strong>Hash-chained audit logs</strong> provide tamper-evident records suitable for governance review and forensic analysis.
+      </p>
+    </section>
+
+    <!-- Evaluation & Benchmarks -->
+    <section id="evaluation">
+      <h2>Evaluation & Resilience Benchmarks</h2>
+      <p>
+        System evaluation employed simulation-based testing under controlled fault injection scenarios to assess performance against measurable availability, integrity, and accountability goals. Reproducible benchmarks enable validation of design claims and future comparative analysis across deployment contexts.
+      </p>
+      <h3>Evaluation Dimensions</h3>
+      <ul>
+        <li><strong>Functional Correctness:</strong> Auth token validation, room access control, moderator permission enforcement, message persistence and recovery verified under nominal operation</li>
+        <li><strong>Resilience Under Network Disruption:</strong> Socket reconnection behavior, message buffering during churn, passive state recovery, participant presence tracking validated under synthetic packet loss and disconnection events</li>
+        <li><strong>Abuse Resistance:</strong> Unauthorized access attempts, token misuse, replay-like behavior, and permission boundary violations tested against permission and audit systems</li>
+        <li><strong>Delivery Reliability:</strong> Message delivery success rate, p95 and p99 socket message latency, reconnect behavior under sustained churn measured via automated benchmark</li>
+        <li><strong>Audit Integrity:</strong> Hash chain consistency, immutability of log entries, and recovery accuracy verified across state rebuild scenarios</li>
+      </ul>
+      <h3>Reproducible Benchmark</h3>
+      <p>
+        Execute resilience benchmark from the <code>backend</code> folder:
+      </p>
+      <pre style="background: #f5f7fa; padding: 10px; overflow-x: auto; border-radius: 3px;"><code>npm run benchmark:resilience:quick</code></pre>
+      <p>or full-duration benchmark:</p>
+      <pre style="background: #f5f7fa; padding: 10px; overflow-x: auto; border-radius: 3px;"><code>npm run benchmark:resilience</code></pre>
+      <p>
+        The benchmark script emits JSON summary metrics including delivery success rate, p95/p99 socket latency, reconnect p95 under churn, and metadata for traceability. Results enable quantitative assessment of system resilience against network volatility.
+      </p>
+    </section>
+
+    <!-- Research Framing -->
+    <section id="context">
+      <h2>Research Framing & African Cyberspace Context</h2>
+      <p>
+        This project is positioned at the intersection of cybersecurity engineering, digital public infrastructure, and data sovereignty in African contexts. The work aligns with research themes around secure systems, trustworthy computing, and resilience under realistic constraint conditions.
+      </p>
+      <p>
+        Design decisions reflect direct experience of cyberspace dynamics in African environments where connectivity remains volatile, centralized platforms operate outside local jurisdictions, and communities require systems that preserve agency and governance transparency. Radar prioritizes African cyberspace outcomes through emphasis on:
+      </p>
+      <ul>
+        <li><strong>Local control:</strong> Communities operate systems within their own infrastructure rather than depending on cloud providers or centralized intermediaries</li>
+        <li><strong>Data sovereignty:</strong> Information access and moderation governance remain locally interpretable and auditable</li>
+        <li><strong>Resilience under constraint:</strong> System operates effectively on modest hardware under variable network conditions typical of African digital infrastructure</li>
+        <li><strong>Transparency in governance:</strong> Moderation decisions are immutable, reviewable, and subject to community audit</li>
+      </ul>
+      <p>
+        The project demonstrates how systems engineering can operationalize data sovereignty principles, produce evidence of security and governance properties through formal threat modeling and testing, and remain deployable in contexts where commercial platforms remain infeasible.
+      </p>
+    </section>
+
+    <!-- Quick Access Buttons -->
+    <div class="btn-group">
+      <a href="docs/pdfs/SWE3090A%20-%20Progress%20Report%20First.pdf" class="btn btn-view">PROGRESS REPORT 1</a>
+      <a href="docs/pdfs/SWE3090A%20-%20Progress%20Report%20Second.pdf" class="btn btn-view">PROGRESS REPORT 2</a>
+      <a href="docs/pdfs/Project%20Documentation.pdf" class="btn btn-view">PROJECT DOCUMENTATION</a>
+      <a href="https://github.com/Swaph/Radar-Activism-Hub" class="btn btn-drive">SOURCE CODE</a>
+    </div>
+
+    <!-- Evidence & Resources -->
+    <section id="evidence">
+      <h2>Technical Evidence & Resources</h2>
+      <p>
+        Complete project documentation, design artifacts, implementation evidence, and reproducible code are provided below. All materials support evidence-centric evaluation of security, resilience, and governance properties. The GitHub repository contains the complete, executable source code with test suites and benchmark harness.
+      </p>
+      <h3>Project Genesis: Kenya Finance Bill Protests 2024</h3>
+      <p>
+        Radar was conceived during the Kenya Finance Bill Protests of June 2024, when government censorship of WhatsApp, Twitter, and cellular networks created immediate communication blackouts across the country. During this period of digital repression, citizens faced coordinated abductions and arrest, with families unable to locate missing persons. The absence of resilient, decentralized communication infrastructure became immediately apparent: centralized platforms could be shut down instantaneously, leaving communities isolated and vulnerable.
+      </p>
+      <p>
+        This project emerged from that experience. Radar prioritizes communication systems that communities can operate and control locally, that remain available when centralized platforms fail, and that preserve transparent governance trails to prevent abuse. The technical choices of persistence, audit logging, and local control reflect direct lessons from the moment when Kenya's information infrastructure was weaponized against its citizens.
+      </p>
+
+    </section>
+
+    <!-- Setup & Reproducibility -->
+    <section style="margin-top: 30px; border-top: 2px solid var(--line); padding-top: 20px;">
+      <h2>Local Setup & Reproducibility</h2>
+      <p>
+        The system is fully reproducible. All dependencies are open-source; no proprietary licenses required. Follow the steps below to run Radar locally.
+      </p>
+      <ol>
+        <li><strong>Clone the repository:</strong> <code>git clone https://github.com/swafiyah/radar-activism-hub.git && cd Radar-Activism-Hub</code></li>
+        <li><strong>Install backend dependencies:</strong> <code>cd backend && npm install</code></li>
+        <li><strong>Install frontend dependencies:</strong> <code>cd ../frontend && npm install</code></li>
+        <li><strong>Start the backend:</strong> <code>cd ../backend && node server.js</code> (runs on port 5000)</li>
+        <li><strong>In a new terminal, start the frontend:</strong> <code>cd frontend && npm run dev</code> (runs on port 5173 with Vite)</li>
+        <li><strong>Access the system:</strong> Navigate to <code>http://localhost:5173</code></li>
+        <li><strong>Run resilience benchmark:</strong> <code>cd backend && npm run benchmark:resilience:quick</code></li>
+      </ol>
+      <p>
+        <small>The frontend requires no authentication for room access; participants join as guests. Backend logs detailed operation traces to aid in understanding socket events and permission enforcement.</small>
+      </p>
+    </section>
+
+    <footer style="margin-top: 40px; font-size: 0.75rem; color: var(--muted); font-family: monospace; border-top: 1px solid var(--line); padding-top: 20px;">
+      DOC_ID: RAD-2026-001 | PROJECT: RADAR RESILIENT INFORMATION HUB | AUTHOR: SWAFIYAH GICHUKI | GENERATED: 14-APR-2026 | REPO: swafiyah/radar-activism-hub
+    </footer>
+  </main>
+</body>
+</html>
